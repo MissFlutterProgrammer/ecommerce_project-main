@@ -17,7 +17,9 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> {
   @override
   void initState() {
-    BlocProvider.of<CategoryBloc>(context).add(CategoryRequestList());
+    BlocProvider.of<CategoryBloc>(context).add(
+      CategoryRequestList(),
+    );
     super.initState();
   }
 

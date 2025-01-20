@@ -9,11 +9,18 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
   final PaymentHandler _paymentHandler;
   BasketBloc(this._paymentHandler, this._basketRepository)
       : super(BasketInitState()) {
-    on<BasketFetchFromHiveEvent>(((event, emit) async {
-      var basketItemList = await _basketRepository.getAllBasketItems();
-      var finalPrice = await _basketRepository.getBasketFinalPrice();
-      emit(BasketDataFetchedState(basketItemList, finalPrice));
-    }));
+    on<BasketFetchFromHiveEvent>(
+      ((event, emit) async {
+        var basketItemList = await _basketRepository.getAllBasketItems();
+        var finalPrice = await _basketRepository.getBasketFinalPrice();
+        emit(
+          BasketDataFetchedState(
+            basketItemList,
+            finalPrice,
+          ),
+        );
+      }),
+    );
 
     on<BasketPaymentInitEvent>((event, emmit) async {
       var finalPrice = await _basketRepository.getBasketFinalPrice();
@@ -28,7 +35,12 @@ class BasketBloc extends Bloc<BasketEvent, BasketState> {
       _basketRepository.removeProduct(event.index);
       var basketItemList = await _basketRepository.getAllBasketItems();
       var finalPrice = await _basketRepository.getBasketFinalPrice();
-      emmit(BasketDataFetchedState(basketItemList, finalPrice));
+      emmit(
+        BasketDataFetchedState(
+          basketItemList,
+          finalPrice,
+        ),
+      );
     });
   }
 }

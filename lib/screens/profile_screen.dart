@@ -84,10 +84,11 @@ class ProfileScreen extends StatelessWidget {
             GestureDetector(
               onTap: () {
                 AuthManager.logout();
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  return LoginScreen();
-                }));
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) {
+                    return LoginScreen();
+                  }),
+                );
               },
               child: Text(
                 'خروج از حساب کاربری',

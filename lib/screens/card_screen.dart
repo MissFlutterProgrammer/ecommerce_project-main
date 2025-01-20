@@ -45,7 +45,9 @@ class CardScreen extends StatelessWidget {
                           child: Row(
                             children: [
                               const SizedBox(width: 16),
-                              Image.asset('assets/images/icon_apple_blue.png'),
+                              Image.asset(
+                                'assets/images/icon_apple_blue.png',
+                              ),
                               const Expanded(
                                 child: Text(
                                   'سبد خرید',
@@ -84,7 +86,9 @@ class CardScreen extends StatelessWidget {
                         },
                       ),
                     },
-                    const SliverPadding(padding: EdgeInsets.only(bottom: 100)),
+                    const SliverPadding(
+                      padding: EdgeInsets.only(bottom: 100),
+                    ),
                   ],
                 ),
                 if (state is BasketDataFetchedState) ...{
