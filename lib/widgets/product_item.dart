@@ -1,5 +1,6 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:apple_shop/bloc/basket/basket_bloc.dart';
-import 'package:apple_shop/bloc/product/product_bloc.dart';
 import 'package:apple_shop/data/model/product.dart';
 import 'package:apple_shop/di/di.dart';
 import 'package:apple_shop/screens/product_detail_screen.dart';
@@ -7,17 +8,14 @@ import 'package:apple_shop/util/extenstions/double_extenstions.dart';
 import 'package:apple_shop/widgets/cached_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
-import 'package:intl/intl.dart';
-
 import '../constants/colors.dart';
 
 class ProductItem extends StatelessWidget {
   Product product;
   ProductItem(
     this.product, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +39,13 @@ class ProductItem extends StatelessWidget {
         ),
         child: Column(
           children: [
-            const SizedBox(
-              height: 10,
-            ),
+            const SizedBox(height: 10),
             Stack(
               alignment: AlignmentDirectional.center,
               children: [
-                Expanded(child: Container()),
+                Expanded(
+                  child: Container(),
+                ),
                 SizedBox(
                   height: 98,
                   width: 98,
@@ -60,10 +58,12 @@ class ProductItem extends StatelessWidget {
                   top: 0,
                   right: 10,
                   child: SizedBox(
-                      width: 24,
-                      height: 24,
-                      child:
-                          Image.asset('assets/images/active_fav_product.png')),
+                    width: 24,
+                    height: 24,
+                    child: Image.asset(
+                      'assets/images/active_fav_product.png',
+                    ),
+                  ),
                 ),
                 Positioned(
                   bottom: 0,
@@ -80,9 +80,10 @@ class ProductItem extends StatelessWidget {
                       child: Text(
                         '${product.persent!.round().toString()} ٪',
                         style: TextStyle(
-                            fontFamily: 'sb',
-                            fontSize: 12,
-                            color: Colors.white),
+                          fontFamily: 'sb',
+                          fontSize: 12,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
@@ -98,7 +99,10 @@ class ProductItem extends StatelessWidget {
                   child: Text(
                     product.name,
                     maxLines: 1,
-                    style: TextStyle(fontFamily: 'sm', fontSize: 14),
+                    style: TextStyle(
+                      fontFamily: 'sm',
+                      fontSize: 14,
+                    ),
                   ),
                 ),
                 Container(
@@ -114,7 +118,10 @@ class ProductItem extends StatelessWidget {
                           color: CustomColors.blue,
                           blurRadius: 25,
                           spreadRadius: -12,
-                          offset: Offset(0.0, 15))
+                          offset: Offset(
+                            0.0,
+                            15,
+                          ))
                     ],
                   ),
                   child: Padding(
@@ -125,13 +132,12 @@ class ProductItem extends StatelessWidget {
                         const Text(
                           'تومان',
                           style: TextStyle(
-                              fontFamily: 'sm',
-                              fontSize: 12,
-                              color: Colors.white),
+                            fontFamily: 'sm',
+                            fontSize: 12,
+                            color: Colors.white,
+                          ),
                         ),
-                        const SizedBox(
-                          width: 5,
-                        ),
+                        const SizedBox(width: 5),
                         Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -139,10 +145,11 @@ class ProductItem extends StatelessWidget {
                             Text(
                               product.price.convertToPrice(),
                               style: const TextStyle(
-                                  fontFamily: 'sm',
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                  decoration: TextDecoration.lineThrough),
+                                fontFamily: 'sm',
+                                fontSize: 12,
+                                color: Colors.white,
+                                decoration: TextDecoration.lineThrough,
+                              ),
                             ),
                             Text(
                               product.realPrice.convertToPrice(),
@@ -156,9 +163,11 @@ class ProductItem extends StatelessWidget {
                         ),
                         const Spacer(),
                         SizedBox(
-                            width: 24,
-                            child: Image.asset(
-                                'assets/images/icon_right_arrow_cricle.png'))
+                          width: 24,
+                          child: Image.asset(
+                            'assets/images/icon_right_arrow_cricle.png',
+                          ),
+                        )
                       ],
                     ),
                   ),

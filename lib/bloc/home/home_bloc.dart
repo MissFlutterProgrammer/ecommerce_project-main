@@ -4,7 +4,6 @@ import 'package:apple_shop/data/repository/category_repository.dart';
 import 'package:apple_shop/data/repository/product_repository.dart';
 import 'package:apple_shop/di/di.dart';
 import 'package:bloc/bloc.dart';
-
 import 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
@@ -21,8 +20,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       var hotestProductList = await _productRepository.getHotest();
       var bestSellerProductList = await _productRepository.getBsetSeller();
 
-      emit(HomeRequestSuccessState(bannerList, categoryList, productList,
-          hotestProductList, bestSellerProductList));
+      emit(
+        HomeRequestSuccessState(
+          bannerList,
+          categoryList,
+          productList,
+          hotestProductList,
+          bestSellerProductList,
+        ),
+      );
     });
   }
 }

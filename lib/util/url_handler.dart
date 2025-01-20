@@ -10,4 +10,3 @@ class UrlLauncher extends UrlHandler {
     launchUrl(Uri.parse(uri), mode: LaunchMode.externalApplication);
   }
 }
-

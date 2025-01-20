@@ -1,7 +1,8 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:apple_shop/data/datasource/comment_datasource.dart';
 import 'package:apple_shop/data/model/comment.dart';
 import 'package:dartz/dartz.dart';
-
 import '../../di/di.dart';
 import '../../util/api_exception.dart';
 

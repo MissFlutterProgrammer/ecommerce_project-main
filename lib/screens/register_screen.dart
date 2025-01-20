@@ -1,8 +1,6 @@
 import 'package:apple_shop/bloc/authentication/auth_bloc.dart';
 import 'package:apple_shop/bloc/authentication/auth_event.dart';
 import 'package:apple_shop/bloc/authentication/auth_state.dart';
-import 'package:apple_shop/constants/colors.dart';
-import 'package:apple_shop/main.dart';
 import 'package:apple_shop/screens/dashbord_screen.dart';
 import 'package:apple_shop/screens/login_screen.dart';
 import 'package:flutter/material.dart';
@@ -20,11 +18,13 @@ class RegisterScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => AuthBloc(),
-        child: ViewContainer(
-            usernameTextController: _usernameTextController,
-            passwordTextController: _passwordTextController,
-            passwordConfirmTextController: _passwordConfirmTextController));
+      create: (context) => AuthBloc(),
+      child: ViewContainer(
+        usernameTextController: _usernameTextController,
+        passwordTextController: _passwordTextController,
+        passwordConfirmTextController: _passwordConfirmTextController,
+      ),
+    );
   }
 }
 
@@ -52,16 +52,15 @@ class ViewContainer extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(
-                  height: 60,
+                const SizedBox(height: 60),
+                SizedBox(
+                  height: 200,
+                  width: 200,
+                  child: Image.asset(
+                    'assets/images/register.jpg',
+                  ),
                 ),
-                Container(
-                    height: 200,
-                    width: 200,
-                    child: Image.asset('assets/images/register.jpg')),
-                const SizedBox(
-                  height: 60,
-                ),
+                const SizedBox(height: 60),
                 Padding(
                   padding: const EdgeInsets.all(24),
                   child: Column(
@@ -69,11 +68,12 @@ class ViewContainer extends StatelessWidget {
                     children: [
                       Text(
                         'نام کاربری :',
-                        style: TextStyle(fontFamily: 'dana', fontSize: 16),
+                        style: TextStyle(
+                          fontFamily: 'dana',
+                          fontSize: 16,
+                        ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      const SizedBox(height: 10),
                       Container(
                         color: Colors.grey[300],
                         child: TextField(
@@ -81,9 +81,10 @@ class ViewContainer extends StatelessWidget {
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                             labelStyle: TextStyle(
-                                fontFamily: 'sm',
-                                fontSize: 18,
-                                color: Colors.black),
+                              fontFamily: 'sm',
+                              fontSize: 18,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                       )
@@ -98,7 +99,10 @@ class ViewContainer extends StatelessWidget {
                     children: [
                       Text(
                         'رمز عبور:',
-                        style: TextStyle(fontFamily: 'dana', fontSize: 16),
+                        style: TextStyle(
+                          fontFamily: 'dana',
+                          fontSize: 16,
+                        ),
                       ),
                       const SizedBox(
                         height: 10,
@@ -113,9 +117,10 @@ class ViewContainer extends StatelessWidget {
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                             labelStyle: TextStyle(
-                                fontFamily: 'sm',
-                                fontSize: 18,
-                                color: Colors.black),
+                              fontFamily: 'sm',
+                              fontSize: 18,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                       )
@@ -130,11 +135,12 @@ class ViewContainer extends StatelessWidget {
                     children: [
                       Text(
                         'تکرار رمز عبور :',
-                        style: TextStyle(fontFamily: 'dana', fontSize: 16),
+                        style: TextStyle(
+                          fontFamily: 'dana',
+                          fontSize: 16,
+                        ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      const SizedBox(height: 10),
                       Container(
                         color: Colors.grey[300],
                         child: TextField(
@@ -145,9 +151,10 @@ class ViewContainer extends StatelessWidget {
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                             labelStyle: TextStyle(
-                                fontFamily: 'sm',
-                                fontSize: 18,
-                                color: Colors.black),
+                              fontFamily: 'sm',
+                              fontSize: 18,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                       ),
@@ -157,24 +164,32 @@ class ViewContainer extends StatelessWidget {
                 BlocConsumer<AuthBloc, AuthState>(listener: ((context, state) {
                   if (state is AuthResponseState) {
                     state.reponse.fold((l) {}, (r) {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => DashBoardScreen()));
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => DashBoardScreen(),
+                        ),
+                      );
                     });
                   }
                 }), builder: ((context, state) {
                   if (state is AuthInitiateState) {
                     return ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        textStyle: TextStyle(fontFamily: 'dana', fontSize: 20),
+                        textStyle: TextStyle(
+                          fontFamily: 'dana',
+                          fontSize: 20,
+                        ),
                         backgroundColor: Colors.blue[700],
                         minimumSize: Size(200, 48),
                       ),
                       onPressed: () {
                         BlocProvider.of<AuthBloc>(context).add(
-                            AuthRegisterRequest(
-                                _usernameTextController.text,
-                                _passwordTextController.text,
-                                _passwordConfirmTextController.text));
+                          AuthRegisterRequest(
+                            _usernameTextController.text,
+                            _passwordTextController.text,
+                            _passwordConfirmTextController.text,
+                          ),
+                        );
                       },
                       child: Text('ثبت نام'),
                     );
@@ -200,16 +215,21 @@ class ViewContainer extends StatelessWidget {
                   height: 20,
                 ),
                 GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) {
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) {
                         return LoginScreen();
-                      }));
-                    },
-                    child: Text(
-                      'اگر حساب کاربری دارید وارد شوید',
-                      style: TextStyle(fontFamily: 'dana', fontSize: 16),
-                    ))
+                      }),
+                    );
+                  },
+                  child: Text(
+                    'اگر حساب کاربری دارید وارد شوید',
+                    style: TextStyle(
+                      fontFamily: 'dana',
+                      fontSize: 16,
+                    ),
+                  ),
+                )
               ],
             ),
           ),

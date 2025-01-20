@@ -1,10 +1,3 @@
-abstract class CategoryEvent {
+abstract class CategoryEvent {}
 
-}
-
-class CategoryRequestList extends CategoryEvent{
-    
-}
-
-
-
+class CategoryRequestList extends CategoryEvent {}

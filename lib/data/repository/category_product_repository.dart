@@ -1,7 +1,6 @@
 import 'package:apple_shop/data/datasource/category_product_datasource.dart';
 import 'package:apple_shop/data/model/product.dart';
 import 'package:dartz/dartz.dart';
-
 import '../../di/di.dart';
 import '../../util/api_exception.dart';
 

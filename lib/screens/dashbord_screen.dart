@@ -10,7 +10,6 @@ import 'package:apple_shop/screens/home_screen.dart';
 import 'package:apple_shop/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../bloc/home/home_event.dart';
 import '../di/di.dart';
 
@@ -46,78 +45,108 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
               backgroundColor: Colors.transparent,
               elevation: 0,
               selectedLabelStyle: const TextStyle(
-                  fontFamily: 'sb', fontSize: 10, color: CustomColors.blue),
+                fontFamily: 'sb',
+                fontSize: 10,
+                color: CustomColors.blue,
+              ),
               unselectedLabelStyle: const TextStyle(
-                  fontFamily: 'sb', fontSize: 10, color: Colors.black),
+                fontFamily: 'sb',
+                fontSize: 10,
+                color: Colors.black,
+              ),
               items: [
                 BottomNavigationBarItem(
-                    icon: Image.asset('assets/images/icon_profile.png'),
-                    activeIcon: Padding(
-                      padding: const EdgeInsets.only(bottom: 3),
-                      child: Container(
-                        child: Image.asset(
-                            'assets/images/icon_profile_active.png'),
-                        decoration: const BoxDecoration(boxShadow: [
+                  icon: Image.asset(
+                    'assets/images/icon_profile.png',
+                  ),
+                  activeIcon: Padding(
+                    padding: const EdgeInsets.only(bottom: 3),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        boxShadow: [
                           BoxShadow(
-                              color: CustomColors.blue,
-                              blurRadius: 20,
-                              spreadRadius: -7,
-                              offset: Offset(0.0, 13))
-                        ]),
+                            color: CustomColors.blue,
+                            blurRadius: 20,
+                            spreadRadius: -7,
+                            offset: Offset(0.0, 13),
+                          )
+                        ],
+                      ),
+                      child: Image.asset(
+                        'assets/images/icon_profile_active.png',
                       ),
                     ),
-                    label: 'حساب کاربری'),
+                  ),
+                  label: 'حساب کاربری',
+                ),
                 BottomNavigationBarItem(
                     icon: Image.asset('assets/images/icon_basket.png'),
                     activeIcon: Padding(
                       padding: const EdgeInsets.only(bottom: 3),
                       child: Container(
-                        child:
-                            Image.asset('assets/images/icon_basket_active.png'),
-                        decoration: const BoxDecoration(boxShadow: [
-                          BoxShadow(
+                        decoration: const BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
                               color: CustomColors.blue,
                               blurRadius: 20,
                               spreadRadius: -7,
-                              offset: Offset(0.0, 13))
-                        ]),
+                              offset: Offset(0.0, 13),
+                            )
+                          ],
+                        ),
+                        child: Image.asset(
+                          'assets/images/icon_basket_active.png',
+                        ),
                       ),
                     ),
                     label: 'سبد خرید'),
                 BottomNavigationBarItem(
-                    icon: Image.asset('assets/images/icon_category.png'),
-                    activeIcon: Padding(
-                      padding: const EdgeInsets.only(bottom: 3),
-                      child: Container(
-                        child: Image.asset(
-                            'assets/images/icon_category_active.png'),
-                        decoration: const BoxDecoration(boxShadow: [
+                  icon: Image.asset(
+                    'assets/images/icon_category.png',
+                  ),
+                  activeIcon: Padding(
+                    padding: const EdgeInsets.only(bottom: 3),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        boxShadow: [
                           BoxShadow(
-                              color: CustomColors.blue,
-                              blurRadius: 20,
-                              spreadRadius: -7,
-                              offset: Offset(0.0, 13))
-                        ]),
+                            color: CustomColors.blue,
+                            blurRadius: 20,
+                            spreadRadius: -7,
+                            offset: Offset(0.0, 13),
+                          )
+                        ],
                       ),
+                      child:
+                          Image.asset('assets/images/icon_category_active.png'),
                     ),
-                    label: 'دسته بندی'),
+                  ),
+                  label: 'دسته بندی',
+                ),
                 BottomNavigationBarItem(
-                    icon: Image.asset('assets/images/icon_home.png'),
-                    activeIcon: Padding(
-                      padding: const EdgeInsets.only(bottom: 3),
-                      child: Container(
-                        child:
-                            Image.asset('assets/images/icon_home_active.png'),
-                        decoration: const BoxDecoration(boxShadow: [
+                  icon: Image.asset(
+                    'assets/images/icon_home.png',
+                  ),
+                  activeIcon: Padding(
+                    padding: const EdgeInsets.only(bottom: 3),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        boxShadow: [
                           BoxShadow(
-                              color: CustomColors.blue,
-                              blurRadius: 20,
-                              spreadRadius: -7,
-                              offset: Offset(0.0, 13))
-                        ]),
+                            color: CustomColors.blue,
+                            blurRadius: 20,
+                            spreadRadius: -7,
+                            offset: Offset(0.0, 13),
+                          )
+                        ],
+                      ),
+                      child: Image.asset(
+                        'assets/images/icon_home_active.png',
                       ),
                     ),
-                    label: 'خانه'),
+                  ),
+                  label: 'خانه',
+                ),
               ],
             ),
           ),
@@ -132,7 +161,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
       BlocProvider(
         create: ((context) {
           var bloc = locator.get<BasketBloc>();
-          bloc.add(BasketFetchFromHiveEvent());
+          bloc.add(
+            BasketFetchFromHiveEvent(),
+          );
           return bloc;
         }),
         child: CardScreen(),
@@ -146,7 +177,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
         child: BlocProvider(
           create: (context) {
             var bloc = HomeBloc();
-            bloc.add(HomeGetInitilzeData());
+            bloc.add(
+              HomeGetInitilzeData(),
+            );
             return bloc;
           },
           child: HomeScreen(),

@@ -1,4 +1,3 @@
-import 'package:apple_shop/bloc/basket/basket_bloc.dart';
 import 'package:apple_shop/data/datasource/authentication_datasource.dart';
 import 'package:apple_shop/data/datasource/banner_datasource.dart';
 import 'package:apple_shop/data/datasource/basket_datasource.dart';
@@ -30,16 +29,17 @@ Future<void> getItInit() async {
 
   _initRepositories();
 
-  locator
-      .registerSingleton<BasketBloc>(BasketBloc(locator.get(), locator.get()));
+  // locator
+  // .registerSingleton<BasketBloc>(BasketBloc(locator.get(), locator.get()));
 }
 
 Future<void> _initComponents() async {
   locator.registerSingleton<SharedPreferences>(
       await SharedPreferences.getInstance());
   locator.registerSingleton<UrlHandler>(UrlLauncher());
-  locator
-      .registerSingleton<PaymentHandler>(ZarinpalPaymentHandler(locator.get()));
+  locator.registerSingleton<PaymentHandler>(
+    ZarinpalPaymentHandler(locator.get()),
+  );
   locator.registerSingleton<Dio>(DioProvider.createDio());
 }
 

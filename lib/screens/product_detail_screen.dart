@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'dart:ui';
 
 import 'package:apple_shop/bloc/basket/baset_event.dart';
@@ -15,7 +17,6 @@ import 'package:apple_shop/widgets/cached_image.dart';
 import 'package:apple_shop/widgets/loading_animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../constants/colors.dart';
 import '../data/model/product_image.dart';
 import '../data/model/variant.dart';
@@ -35,8 +36,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
     return BlocProvider(
       create: ((context) {
         var bloc = ProductBloc();
-        bloc.add(ProductInitializeEvent(
-            widget.product.id, widget.product.categoryId));
+        bloc.add(
+          ProductInitializeEvent(
+            widget.product.id,
+            widget.product.categoryId,
+          ),
+        );
         return bloc;
       }),
       child: DetailContentWidget(
@@ -48,9 +53,9 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
 class DetailContentWidget extends StatelessWidget {
   const DetailContentWidget({
-    Key? key,
+    super.key,
     required this.parentWidget,
-  }) : super(key: key);
+  });
 
   final ProductDetailScreen parentWidget;
 
@@ -84,31 +89,36 @@ class DetailContentWidget extends StatelessWidget {
                             const SizedBox(
                               width: 16,
                             ),
-                            Image.asset('assets/images/icon_apple_blue.png'),
-                            Expanded(
-                                child: state.productCategory.fold((l) {
-                              return const Text(
-                                'اطلاعات محصول',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontFamily: 'sb',
-                                    fontSize: 16,
-                                    color: CustomColors.blue),
-                              );
-                            }, (productCategory) {
-                              return Text(
-                                productCategory.title!,
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                    fontFamily: 'sb',
-                                    fontSize: 16,
-                                    color: CustomColors.blue),
-                              );
-                            })),
-                            Image.asset('assets/images/icon_back.png'),
-                            const SizedBox(
-                              width: 16,
+                            Image.asset(
+                              'assets/images/icon_apple_blue.png',
                             ),
+                            Expanded(
+                              child: state.productCategory.fold((l) {
+                                return const Text(
+                                  'اطلاعات محصول',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontFamily: 'sb',
+                                    fontSize: 16,
+                                    color: CustomColors.blue,
+                                  ),
+                                );
+                              }, (productCategory) {
+                                return Text(
+                                  productCategory.title!,
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontFamily: 'sb',
+                                    fontSize: 16,
+                                    color: CustomColors.blue,
+                                  ),
+                                );
+                              }),
+                            ),
+                            Image.asset(
+                              'assets/images/icon_back.png',
+                            ),
+                            const SizedBox(width: 16),
                           ],
                         ),
                       ),
@@ -123,9 +133,10 @@ class DetailContentWidget extends StatelessWidget {
                         parentWidget.product.name,
                         textAlign: TextAlign.center,
                         style: const TextStyle(
-                            fontFamily: 'sb',
-                            fontSize: 16,
-                            color: Colors.black),
+                          fontFamily: 'sb',
+                          fontSize: 16,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
                   )
@@ -137,7 +148,9 @@ class DetailContentWidget extends StatelessWidget {
                     );
                   }, (productImageList) {
                     return GalleryWidget(
-                        parentWidget.product.thumbnail, productImageList);
+                      parentWidget.product.thumbnail,
+                      productImageList,
+                    );
                   })
                 },
                 if (state is ProductDetailResponseState) ...{
@@ -175,8 +188,11 @@ class DetailContentWidget extends StatelessWidget {
                               return BlocProvider(
                                 create: (context) {
                                   final bloc = CommentBloc(locator.get());
-                                  bloc.add(CommentInitilzeEvent(
-                                      parentWidget.product.id));
+                                  bloc.add(
+                                    CommentInitilzeEvent(
+                                      parentWidget.product.id,
+                                    ),
+                                  );
                                   return bloc;
                                 },
                                 child: CommentBottomsheet(
@@ -190,26 +206,28 @@ class DetailContentWidget extends StatelessWidget {
                             const EdgeInsets.only(top: 24, left: 44, right: 44),
                         height: 46,
                         decoration: BoxDecoration(
-                            color: Colors.white,
-                            border:
-                                Border.all(width: 1, color: CustomColors.gery),
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(15))),
+                          color: Colors.white,
+                          border: Border.all(
+                            width: 1,
+                            color: CustomColors.gery,
+                          ),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(15)),
+                        ),
                         child: Row(
                           children: [
-                            const SizedBox(
-                              width: 10,
+                            const SizedBox(width: 10),
+                            Image.asset(
+                              'assets/images/icon_left_categroy.png',
                             ),
-                            Image.asset('assets/images/icon_left_categroy.png'),
-                            const SizedBox(
-                              width: 10,
-                            ),
+                            const SizedBox(width: 10),
                             const Text(
                               'مشاهده',
                               style: TextStyle(
-                                  fontFamily: 'sb',
-                                  fontSize: 12,
-                                  color: CustomColors.blue),
+                                fontFamily: 'sb',
+                                fontSize: 12,
+                                color: CustomColors.blue,
+                              ),
                             ),
                             const Spacer(),
                             Stack(
@@ -276,13 +294,15 @@ class DetailContentWidget extends StatelessWidget {
                                           BorderRadius.all(Radius.circular(8)),
                                     ),
                                     child: const Center(
-                                        child: Text(
-                                      '+10',
-                                      style: TextStyle(
+                                      child: Text(
+                                        '+10',
+                                        style: TextStyle(
                                           fontFamily: 'sb',
                                           fontSize: 12,
-                                          color: Colors.white),
-                                    )),
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -292,11 +312,11 @@ class DetailContentWidget extends StatelessWidget {
                             ),
                             const Text(
                               ': نظرات کاربران',
-                              style: TextStyle(fontFamily: 'sm'),
+                              style: TextStyle(
+                                fontFamily: 'sm',
+                              ),
                             ),
-                            const SizedBox(
-                              width: 10,
-                            ),
+                            const SizedBox(width: 10),
                           ],
                         ),
                       ),
@@ -351,69 +371,75 @@ class CommentBottomsheet extends StatelessWidget {
                 if (state is CommentResponse) ...{
                   state.response.fold((l) {
                     return const SliverToBoxAdapter(
-                      child: Text('خطایی در نمایش نظرات به وجود آمده'),
+                      child: Text(
+                        'خطایی در نمایش نظرات به وجود آمده',
+                      ),
                     );
                   }, (commentList) {
                     if (commentList.isEmpty) {
                       return const SliverToBoxAdapter(
-                        child:
-                            Center(child: Text('نظری برای این محصول ثبت نشده')),
+                        child: Center(
+                          child: Text(
+                            'نظری برای این محصول ثبت نشده',
+                          ),
+                        ),
                       );
                     }
                     return SliverList(
-                        delegate: SliverChildBuilderDelegate(
-                      (context, index) {
-                        return Container(
-                          padding: const EdgeInsets.all(16),
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 16, vertical: 8),
-                          decoration: BoxDecoration(
+                      delegate: SliverChildBuilderDelegate(
+                        (context, index) {
+                          return Container(
+                            padding: const EdgeInsets.all(16),
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 16, vertical: 8),
+                            decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
-                              color: Colors.white),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(
-                                      (commentList[index].username.isEmpty)
-                                          ? 'کاربر'
-                                          : commentList[index].username,
-                                      style: const TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                      textAlign: TextAlign.end,
-                                    ),
-                                    const SizedBox(
-                                      height: 8,
-                                    ),
-                                    Text(
-                                      commentList[index].text,
-                                      textAlign: TextAlign.end,
-                                    ),
-                                  ],
+                              color: Colors.white,
+                            ),
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        (commentList[index].username.isEmpty)
+                                            ? 'کاربر'
+                                            : commentList[index].username,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                        textAlign: TextAlign.end,
+                                      ),
+                                      const SizedBox(height: 8),
+                                      Text(
+                                        commentList[index].text,
+                                        textAlign: TextAlign.end,
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(
-                                width: 16,
-                              ),
-                              SizedBox(
-                                height: 40,
-                                width: 40,
-                                child: (commentList[index].avatar.isNotEmpty)
-                                    ? CachedImage(
-                                        imageUrl:
-                                            commentList[index].userThumbnailUrl,
-                                      )
-                                    : Image.asset('assets/images/avatar.png'),
-                              )
-                            ],
-                          ),
-                        );
-                      },
-                      childCount: commentList.length,
-                    ));
+                                const SizedBox(width: 16),
+                                SizedBox(
+                                  height: 40,
+                                  width: 40,
+                                  child: (commentList[index].avatar.isNotEmpty)
+                                      ? CachedImage(
+                                          imageUrl: commentList[index]
+                                              .userThumbnailUrl,
+                                        )
+                                      : Image.asset(
+                                          'assets/images/avatar.png',
+                                        ),
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                        childCount: commentList.length,
+                      ),
+                    );
                   })
                 },
               ],
@@ -428,19 +454,27 @@ class CommentBottomsheet extends StatelessWidget {
                     controller: textController,
                     decoration: const InputDecoration(
                       labelStyle: TextStyle(
-                          fontFamily: 'sm', fontSize: 18, color: Colors.black),
+                        fontFamily: 'sm',
+                        fontSize: 18,
+                        color: Colors.black,
+                      ),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(20),
                         ),
-                        borderSide: BorderSide(color: Colors.black, width: 3),
+                        borderSide: BorderSide(
+                          color: Colors.black,
+                          width: 3,
+                        ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(
                           Radius.circular(20),
                         ),
-                        borderSide:
-                            BorderSide(color: CustomColors.blue, width: 3),
+                        borderSide: BorderSide(
+                          color: CustomColors.blue,
+                          width: 3,
+                        ),
                       ),
                     ),
                   ),
@@ -453,9 +487,10 @@ class CommentBottomsheet extends StatelessWidget {
                           child: Container(
                             height: 60,
                             decoration: const BoxDecoration(
-                                color: CustomColors.blue,
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15))),
+                              color: CustomColors.blue,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                            ),
                           ),
                         ),
                         Positioned(
@@ -474,8 +509,11 @@ class CommentBottomsheet extends StatelessWidget {
                                     //toast
                                   }
                                   context.read<CommentBloc>().add(
-                                      CommentPostEvent(
-                                          productId, textController.text));
+                                        CommentPostEvent(
+                                          productId,
+                                          textController.text,
+                                        ),
+                                      );
 
                                   textController.text = '';
                                 },
@@ -485,9 +523,10 @@ class CommentBottomsheet extends StatelessWidget {
                                     child: Text(
                                       'افزودن نظر به محصول',
                                       style: TextStyle(
-                                          fontFamily: 'sb',
-                                          fontSize: 16,
-                                          color: Colors.white),
+                                        fontFamily: 'sb',
+                                        fontSize: 16,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -513,8 +552,8 @@ class ProductProperties extends StatefulWidget {
 
   ProductProperties(
     this.productPropertyList, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<ProductProperties> createState() => _ProductPropertiesState();
@@ -525,83 +564,87 @@ class _ProductPropertiesState extends State<ProductProperties> {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-        child: Column(
-      children: [
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              _isVisible = !_isVisible;
-            });
-          },
-          child: Container(
-            margin: const EdgeInsets.only(top: 24, left: 44, right: 44),
-            height: 46,
-            decoration: BoxDecoration(
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                _isVisible = !_isVisible;
+              });
+            },
+            child: Container(
+              margin: const EdgeInsets.only(top: 24, left: 44, right: 44),
+              height: 46,
+              decoration: BoxDecoration(
                 color: Colors.white,
                 border: Border.all(width: 1, color: CustomColors.gery),
-                borderRadius: const BorderRadius.all(Radius.circular(15))),
-            child: Row(
-              children: [
-                const SizedBox(
-                  width: 10,
-                ),
-                Image.asset('assets/images/icon_left_categroy.png'),
-                const SizedBox(
-                  width: 10,
-                ),
-                const Text(
-                  'مشاهده',
-                  style: TextStyle(
-                      fontFamily: 'sb', fontSize: 12, color: CustomColors.blue),
-                ),
-                const Spacer(),
-                const Text(
-                  ': مشخصات فنی ',
-                  style: TextStyle(fontFamily: 'sm'),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-              ],
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
+              ),
+              child: Row(
+                children: [
+                  const SizedBox(width: 10),
+                  Image.asset(
+                    'assets/images/icon_left_categroy.png',
+                  ),
+                  const SizedBox(width: 10),
+                  const Text(
+                    'مشاهده',
+                    style: TextStyle(
+                      fontFamily: 'sb',
+                      fontSize: 12,
+                      color: CustomColors.blue,
+                    ),
+                  ),
+                  const Spacer(),
+                  const Text(
+                    ': مشخصات فنی ',
+                    style: TextStyle(
+                      fontFamily: 'sm',
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                ],
+              ),
             ),
           ),
-        ),
-        Visibility(
-          visible: _isVisible,
-          child: Container(
-            margin: const EdgeInsets.only(top: 24, left: 44, right: 44),
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
+          Visibility(
+            visible: _isVisible,
+            child: Container(
+              margin: const EdgeInsets.only(top: 24, left: 44, right: 44),
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
                 color: Colors.white,
                 border: Border.all(width: 1, color: CustomColors.gery),
-                borderRadius: const BorderRadius.all(Radius.circular(15))),
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: widget.productPropertyList.length,
-              itemBuilder: (context, index) {
-                var property = widget.productPropertyList[index];
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Flexible(
-                      child: Text(
-                        '${property.value!} : ${property.title!}',
-                        textAlign: TextAlign.right,
-                        style: const TextStyle(
-                          fontFamily: 'sm',
-                          fontSize: 14,
-                          height: 1.8,
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
+              ),
+              child: ListView.builder(
+                shrinkWrap: true,
+                itemCount: widget.productPropertyList.length,
+                itemBuilder: (context, index) {
+                  var property = widget.productPropertyList[index];
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          '${property.value!} : ${property.title!}',
+                          textAlign: TextAlign.right,
+                          style: const TextStyle(
+                            fontFamily: 'sm',
+                            fontSize: 14,
+                            height: 1.8,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                );
-              },
+                    ],
+                  );
+                },
+              ),
             ),
           ),
-        ),
-      ],
-    ));
+        ],
+      ),
+    );
   }
 }
 
@@ -609,8 +652,8 @@ class ProductDescription extends StatefulWidget {
   String productDescription;
   ProductDescription(
     this.productDescription, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<ProductDescription> createState() => _ProductDescriptionState();
@@ -621,64 +664,75 @@ class _ProductDescriptionState extends State<ProductDescription> {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-        child: Column(
-      children: [
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              _isVisible = !_isVisible;
-            });
-          },
-          child: Container(
-            margin: const EdgeInsets.only(top: 24, left: 44, right: 44),
-            height: 46,
-            decoration: BoxDecoration(
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: () {
+              setState(() {
+                _isVisible = !_isVisible;
+              });
+            },
+            child: Container(
+              margin: const EdgeInsets.only(top: 24, left: 44, right: 44),
+              height: 46,
+              decoration: BoxDecoration(
                 color: Colors.white,
-                border: Border.all(width: 1, color: CustomColors.gery),
-                borderRadius: const BorderRadius.all(Radius.circular(15))),
-            child: Row(
-              children: [
-                const SizedBox(
-                  width: 10,
+                border: Border.all(
+                  width: 1,
+                  color: CustomColors.gery,
                 ),
-                Image.asset('assets/images/icon_left_categroy.png'),
-                const SizedBox(
-                  width: 10,
-                ),
-                const Text(
-                  'مشاهده',
-                  style: TextStyle(
-                      fontFamily: 'sb', fontSize: 12, color: CustomColors.blue),
-                ),
-                const Spacer(),
-                const Text(
-                  ': توضییحات محصول',
-                  style: TextStyle(fontFamily: 'sm'),
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-              ],
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
+              ),
+              child: Row(
+                children: [
+                  const SizedBox(width: 10),
+                  Image.asset(
+                    'assets/images/icon_left_categroy.png',
+                  ),
+                  const SizedBox(width: 10),
+                  const Text(
+                    'مشاهده',
+                    style: TextStyle(
+                      fontFamily: 'sb',
+                      fontSize: 12,
+                      color: CustomColors.blue,
+                    ),
+                  ),
+                  const Spacer(),
+                  const Text(
+                    ': توضییحات محصول',
+                    style: TextStyle(
+                      fontFamily: 'sm',
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                ],
+              ),
             ),
           ),
-        ),
-        Visibility(
-          visible: _isVisible,
-          child: Container(
+          Visibility(
+            visible: _isVisible,
+            child: Container(
               margin: const EdgeInsets.only(top: 24, left: 44, right: 44),
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(width: 1, color: CustomColors.gery),
-                  borderRadius: const BorderRadius.all(Radius.circular(15))),
+                color: Colors.white,
+                border: Border.all(
+                  width: 1,
+                  color: CustomColors.gery,
+                ),
+                borderRadius: const BorderRadius.all(Radius.circular(15)),
+              ),
               child: Text(
                 widget.productDescription,
                 style: TextStyle(fontFamily: 'sm', fontSize: 16, height: 1.8),
                 textAlign: TextAlign.right,
-              )),
-        ),
-      ],
-    ));
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -686,19 +740,21 @@ class VariantContainerGenerator extends StatelessWidget {
   List<ProductVarint> productVariantList;
   VariantContainerGenerator(
     this.productVariantList, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Column(children: [
-        for (var productVariant in productVariantList) ...{
-          if (productVariant.variantList.isNotEmpty) ...{
-            VariantGeneratorChild(productVariant)
+      child: Column(
+        children: [
+          for (var productVariant in productVariantList) ...{
+            if (productVariant.variantList.isNotEmpty) ...{
+              VariantGeneratorChild(productVariant)
+            }
           }
-        }
-      ]),
+        ],
+      ),
     );
   }
 }
@@ -716,11 +772,12 @@ class VariantGeneratorChild extends StatelessWidget {
         children: [
           Text(
             productVariant.variantType.title!,
-            style: TextStyle(fontFamily: 'sm', fontSize: 12),
+            style: TextStyle(
+              fontFamily: 'sm',
+              fontSize: 12,
+            ),
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          const SizedBox(height: 10),
           if (productVariant.variantType.type == VariantTypeEnum.COLOR) ...{
             ColorVarinantList(productVariant.variantList)
           },
@@ -741,8 +798,8 @@ class GalleryWidget extends StatefulWidget {
   GalleryWidget(
     this.defaultProductThumbnail,
     this.productImageList, {
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<GalleryWidget> createState() => _GalleryWidgetState();
@@ -775,12 +832,13 @@ class _GalleryWidgetState extends State<GalleryWidget> {
                           Image.asset(
                             'assets/images/icon_star.png',
                           ),
-                          const SizedBox(
-                            width: 2,
-                          ),
+                          const SizedBox(width: 2),
                           const Text(
                             '۴.۶',
-                            style: TextStyle(fontFamily: 'sm', fontSize: 12),
+                            style: TextStyle(
+                              fontFamily: 'sm',
+                              fontSize: 12,
+                            ),
                           ),
                         ],
                       ),
@@ -789,13 +847,16 @@ class _GalleryWidgetState extends State<GalleryWidget> {
                         height: 200,
                         width: 200,
                         child: CachedImage(
-                            imageUrl: (widget.productImageList.isEmpty)
-                                ? widget.defaultProductThumbnail
-                                : widget.productImageList[widget.selectedItem]
-                                    .imageUrl),
+                          imageUrl: (widget.productImageList.isEmpty)
+                              ? widget.defaultProductThumbnail
+                              : widget.productImageList[widget.selectedItem]
+                                  .imageUrl,
+                        ),
                       ),
                       Spacer(),
-                      Image.asset('assets/images/icon_favorite_deactive.png')
+                      Image.asset(
+                        'assets/images/icon_favorite_deactive.png',
+                      )
                     ],
                   ),
                 ),
@@ -824,7 +885,9 @@ class _GalleryWidgetState extends State<GalleryWidget> {
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(10)),
                               border: Border.all(
-                                  width: 1, color: CustomColors.gery),
+                                width: 1,
+                                color: CustomColors.gery,
+                              ),
                             ),
                             child: CachedImage(
                               imageUrl: widget.productImageList[index].imageUrl,
@@ -836,9 +899,7 @@ class _GalleryWidgetState extends State<GalleryWidget> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                )
+                const SizedBox(height: 20)
               }
             ],
           ),
@@ -862,8 +923,9 @@ class AddToBasketButton extends StatelessWidget {
             height: 60,
             width: 140,
             decoration: const BoxDecoration(
-                color: CustomColors.blue,
-                borderRadius: BorderRadius.all(Radius.circular(15))),
+              color: CustomColors.blue,
+              borderRadius: BorderRadius.all(Radius.circular(15)),
+            ),
           ),
         ),
         Positioned(
@@ -876,14 +938,17 @@ class AddToBasketButton extends StatelessWidget {
                   context.read<ProductBloc>().add(ProductAddToBasket(product));
                   context.read<BasketBloc>().add(BasketFetchFromHiveEvent());
                 },
-                child: Container(
+                child: SizedBox(
                   height: 53,
                   width: 160,
                   child: const Center(
                     child: Text(
                       'افزودن سبد خرید',
                       style: TextStyle(
-                          fontFamily: 'sb', fontSize: 16, color: Colors.white),
+                        fontFamily: 'sb',
+                        fontSize: 16,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -909,8 +974,9 @@ class PriceTagButton extends StatelessWidget {
             height: 60,
             width: 140,
             decoration: const BoxDecoration(
-                color: CustomColors.green,
-                borderRadius: BorderRadius.all(Radius.circular(15))),
+              color: CustomColors.green,
+              borderRadius: BorderRadius.all(Radius.circular(15)),
+            ),
           ),
         ),
         Positioned(
@@ -918,7 +984,7 @@ class PriceTagButton extends StatelessWidget {
             borderRadius: const BorderRadius.all(Radius.circular(15)),
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-              child: Container(
+              child: SizedBox(
                 height: 53,
                 width: 160,
                 child: Padding(
@@ -929,13 +995,12 @@ class PriceTagButton extends StatelessWidget {
                       const Text(
                         'تومان',
                         style: TextStyle(
-                            fontFamily: 'sm',
-                            fontSize: 12,
-                            color: Colors.white),
+                          fontFamily: 'sm',
+                          fontSize: 12,
+                          color: Colors.white,
+                        ),
                       ),
-                      const SizedBox(
-                        width: 5,
-                      ),
+                      const SizedBox(width: 5),
                       const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -943,10 +1008,11 @@ class PriceTagButton extends StatelessWidget {
                           Text(
                             '۴۹،۸۰۰،۰۰۰',
                             style: TextStyle(
-                                fontFamily: 'sm',
-                                fontSize: 12,
-                                color: Colors.white,
-                                decoration: TextDecoration.lineThrough),
+                              fontFamily: 'sm',
+                              fontSize: 12,
+                              color: Colors.white,
+                              decoration: TextDecoration.lineThrough,
+                            ),
                           ),
                           Text(
                             '۴۸،۸۰۰،۰۰۰',
@@ -972,9 +1038,10 @@ class PriceTagButton extends StatelessWidget {
                           child: Text(
                             '٪۳',
                             style: TextStyle(
-                                fontFamily: 'sb',
-                                fontSize: 12,
-                                color: Colors.white),
+                              fontFamily: 'sb',
+                              fontSize: 12,
+                              color: Colors.white,
+                            ),
                           ),
                         ),
                       )
@@ -1008,41 +1075,46 @@ class _ColorVarinantListState extends State<ColorVarinantList> {
       child: SizedBox(
         height: 30,
         child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: widget.variantList.length,
-            itemBuilder: ((context, index) {
-              String categoryColor = 'ff${widget.variantList[index].value}';
-              int hexColor = int.parse(categoryColor, radix: 16);
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _selectedIndex = index;
-                  });
-                },
+          scrollDirection: Axis.horizontal,
+          itemCount: widget.variantList.length,
+          itemBuilder: ((context, index) {
+            String categoryColor = 'ff${widget.variantList[index].value}';
+            int hexColor = int.parse(categoryColor, radix: 16);
+            return GestureDetector(
+              onTap: () {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
+              child: Container(
+                margin: const EdgeInsets.only(left: 10),
+                padding: EdgeInsets.all(1),
+                height: 30,
+                width: 30,
+                decoration: BoxDecoration(
+                  border: (_selectedIndex == index)
+                      ? Border.all(
+                          width: 1,
+                          color: CustomColors.blueIndicator,
+                          strokeAlign: BorderSide.strokeAlignOutside,
+                        )
+                      : Border.all(
+                          width: 2,
+                          color: Colors.white,
+                        ),
+                  color: Colors.white,
+                  borderRadius: const BorderRadius.all(Radius.circular(8)),
+                ),
                 child: Container(
-                  margin: const EdgeInsets.only(left: 10),
-                  padding: EdgeInsets.all(1),
-                  height: 30,
-                  width: 30,
                   decoration: BoxDecoration(
-                    border: (_selectedIndex == index)
-                        ? Border.all(
-                            width: 1,
-                            color: CustomColors.blueIndicator,
-                            strokeAlign: BorderSide.strokeAlignOutside)
-                        : Border.all(width: 2, color: Colors.white),
-                    color: Colors.white,
+                    color: Color(hexColor),
                     borderRadius: const BorderRadius.all(Radius.circular(8)),
                   ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Color(hexColor),
-                      borderRadius: const BorderRadius.all(Radius.circular(8)),
-                    ),
-                  ),
                 ),
-              );
-            })),
+              ),
+            );
+          }),
+        ),
       ),
     );
   }
@@ -1065,37 +1137,47 @@ class _SotrageVariantListState extends State<SotrageVariantList> {
       child: SizedBox(
         height: 26,
         child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: widget.storageVarinats.length,
-            itemBuilder: ((context, index) {
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _selectedIndex = index;
-                  });
-                },
-                child: Container(
-                  margin: const EdgeInsets.only(left: 10),
-                  height: 25,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.all(Radius.circular(8)),
-                    border: (_selectedIndex == index)
-                        ? Border.all(
-                            width: 2, color: CustomColors.blueIndicator)
-                        : Border.all(width: 1, color: CustomColors.gery),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Center(
-                        child: Text(
+          scrollDirection: Axis.horizontal,
+          itemCount: widget.storageVarinats.length,
+          itemBuilder: ((context, index) {
+            return GestureDetector(
+              onTap: () {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
+              child: Container(
+                margin: const EdgeInsets.only(left: 10),
+                height: 25,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: const BorderRadius.all(Radius.circular(8)),
+                  border: (_selectedIndex == index)
+                      ? Border.all(
+                          width: 2,
+                          color: CustomColors.blueIndicator,
+                        )
+                      : Border.all(
+                          width: 1,
+                          color: CustomColors.gery,
+                        ),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Center(
+                    child: Text(
                       widget.storageVarinats[index].value!,
-                      style: const TextStyle(fontFamily: 'sb', fontSize: 12),
-                    )),
+                      style: const TextStyle(
+                        fontFamily: 'sb',
+                        fontSize: 12,
+                      ),
+                    ),
                   ),
                 ),
-              );
-            })),
+              ),
+            );
+          }),
+        ),
       ),
     );
   }

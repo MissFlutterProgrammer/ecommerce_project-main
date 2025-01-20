@@ -1,7 +1,6 @@
 import 'package:apple_shop/data/datasource/banner_datasource.dart';
 import 'package:apple_shop/di/di.dart';
 import 'package:dartz/dartz.dart';
-
 import '../../util/api_exception.dart';
 import '../model/banner.dart';
 

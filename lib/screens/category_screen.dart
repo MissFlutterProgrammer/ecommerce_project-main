@@ -4,7 +4,6 @@ import 'package:apple_shop/bloc/category/category_state.dart';
 import 'package:apple_shop/widgets/cached_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../constants/colors.dart';
 import '../data/model/category.dart';
 
@@ -42,18 +41,19 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   ),
                   child: Row(
                     children: [
-                      const SizedBox(
-                        width: 16,
+                      const SizedBox(width: 16),
+                      Image.asset(
+                        'assets/images/icon_apple_blue.png',
                       ),
-                      Image.asset('assets/images/icon_apple_blue.png'),
                       const Expanded(
                         child: Text(
                           'دسته بندی',
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontFamily: 'sb',
-                              fontSize: 16,
-                              color: CustomColors.blue),
+                            fontFamily: 'sb',
+                            fontSize: 16,
+                            color: CustomColors.blue,
+                          ),
                         ),
                       )
                     ],
@@ -62,27 +62,30 @@ class _CategoryScreenState extends State<CategoryScreen> {
               ),
             ),
             BlocBuilder<CategoryBloc, CategoryState>(
-                builder: ((context, state) {
-              if (state is CategoryLoadingState) {
-                return SliverToBoxAdapter(
-                  child: Center(child: CircularProgressIndicator()),
-                );
-              }
-              if (state is CategoryResponseState) {
-                return state.response.fold((l) {
+              builder: ((context, state) {
+                if (state is CategoryLoadingState) {
                   return SliverToBoxAdapter(
-                    child: Center(child: Text(l)),
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
                   );
-                }, (r) {
-                  return ListCategory(
-                    list: r,
-                  );
-                });
-              }
-              return SliverToBoxAdapter(
-                child: Text('error'),
-              );
-            })),
+                }
+                if (state is CategoryResponseState) {
+                  return state.response.fold((l) {
+                    return SliverToBoxAdapter(
+                      child: Center(child: Text(l)),
+                    );
+                  }, (r) {
+                    return ListCategory(
+                      list: r,
+                    );
+                  });
+                }
+                return SliverToBoxAdapter(
+                  child: Text('error'),
+                );
+              }),
+            ),
           ],
         ),
       ),
@@ -92,18 +95,24 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
 class ListCategory extends StatelessWidget {
   final List<Category>? list;
-  const ListCategory({Key? key, required this.list}) : super(key: key);
+  const ListCategory({super.key, required this.list});
 
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
       padding: const EdgeInsets.symmetric(horizontal: 44),
       sliver: SliverGrid(
-        delegate: SliverChildBuilderDelegate(((context, index) {
-          return CachedImage(imageUrl: list?[index].thumbnail);
-        }), childCount: list?.length ?? 0),
+        delegate: SliverChildBuilderDelegate(
+          ((context, index) {
+            return CachedImage(imageUrl: list?[index].thumbnail);
+          }),
+          childCount: list?.length ?? 0,
+        ),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 20),
+          crossAxisCount: 2,
+          mainAxisSpacing: 20,
+          crossAxisSpacing: 20,
+        ),
       ),
     );
   }

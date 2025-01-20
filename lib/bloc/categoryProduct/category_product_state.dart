@@ -1,5 +1,4 @@
 import 'package:dartz/dartz.dart';
-
 import '../../data/model/product.dart';
 
 abstract class CategoryProductState {}

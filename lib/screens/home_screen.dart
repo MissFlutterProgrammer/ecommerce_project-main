@@ -1,9 +1,10 @@
+// ignore_for_file: camel_case_types, must_be_immutable
+
 import 'package:apple_shop/bloc/home/home_bloc.dart';
 import 'package:apple_shop/bloc/home/home_state.dart';
 import 'package:apple_shop/data/model/banner.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:loading_indicator/loading_indicator.dart';
 import '../bloc/home/home_event.dart';
 import '../constants/colors.dart';
 import '../data/model/category.dart';
@@ -20,11 +21,13 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: CustomColors.backgroundScreenColor,
-      body: SafeArea(child: BlocBuilder<HomeBloc, HomeState>(
-        builder: (context, state) {
-          return _getHomeScreenContent(state, context);
-        },
-      )),
+      body: SafeArea(
+        child: BlocBuilder<HomeBloc, HomeState>(
+          builder: (context, state) {
+            return _getHomeScreenContent(state, context);
+          },
+        ),
+      ),
     );
   }
 }
@@ -37,52 +40,67 @@ Widget _getHomeScreenContent(HomeState state, BuildContext context) {
   } else if (state is HomeRequestSuccessState) {
     return RefreshIndicator(
       onRefresh: () async {
-        context.read<HomeBloc>().add(HomeGetInitilzeData());
+        context.read<HomeBloc>().add(
+              HomeGetInitilzeData(),
+            );
       },
       child: CustomScrollView(
         slivers: [
-          const SliverPadding(padding: EdgeInsets.only(top: 24)),
+          const SliverPadding(
+            padding: EdgeInsets.only(top: 24),
+          ),
           const _getSearchBox(),
           state.bannerList.fold((exceptionMessage) {
-            return SliverToBoxAdapter(child: Text(exceptionMessage));
+            return SliverToBoxAdapter(
+              child: Text(exceptionMessage),
+            );
           }, (listBanners) {
             return _getBanners(listBanners);
           }),
           const _getCategoryListTitle(),
           state.categoryList.fold((exceptionMessage) {
-            return SliverToBoxAdapter(child: Text(exceptionMessage));
+            return SliverToBoxAdapter(
+              child: Text(exceptionMessage),
+            );
           }, (categoryList) {
             return _getCategoryList(categoryList);
           }),
           const _getBestSellerTitle(),
           state.bestSellerProductList.fold((exceptionMessage) {
-            return SliverToBoxAdapter(child: Text(exceptionMessage));
+            return SliverToBoxAdapter(
+              child: Text(exceptionMessage),
+            );
           }, (productList) {
             return _getBestSellerProducts(productList);
           }),
           const _getMostViewedTitle(),
           state.hotestProductList.fold((exceptionMessage) {
-            return SliverToBoxAdapter(child: Text(exceptionMessage));
+            return SliverToBoxAdapter(
+              child: Text(exceptionMessage),
+            );
           }, (productList) {
             return _getMostViewedProduct(productList);
           }),
-          const SliverPadding(padding: EdgeInsets.only(top: 24)),
+          const SliverPadding(
+            padding: EdgeInsets.only(top: 24),
+          ),
         ],
       ),
     );
   } else {
     return const Center(
-      child: Text('خطایی در دریافت اطلاعات به وجود آمده!'),
+      child: Text(
+        'خطایی در دریافت اطلاعات به وجود آمده!',
+      ),
     );
   }
 }
 
 class _getMostViewedProduct extends StatelessWidget {
   final List<Product> productList;
-  _getMostViewedProduct(
-    this.productList, {
-    Key? key,
-  }) : super(key: key);
+  const _getMostViewedProduct(
+    this.productList,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -92,14 +110,15 @@ class _getMostViewedProduct extends StatelessWidget {
         child: SizedBox(
           height: 200,
           child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: productList.length,
-              itemBuilder: ((context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: ProductItem(productList[index]),
-                );
-              })),
+            scrollDirection: Axis.horizontal,
+            itemCount: productList.length,
+            itemBuilder: ((context, index) {
+              return Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: ProductItem(productList[index]),
+              );
+            }),
+          ),
         ),
       ),
     );
@@ -107,9 +126,7 @@ class _getMostViewedProduct extends StatelessWidget {
 }
 
 class _getMostViewedTitle extends StatelessWidget {
-  const _getMostViewedTitle({
-    Key? key,
-  }) : super(key: key);
+  const _getMostViewedTitle();
 
   @override
   Widget build(BuildContext context) {
@@ -122,17 +139,23 @@ class _getMostViewedTitle extends StatelessWidget {
             const Text(
               'پربازدید ترین‌ ها',
               style: TextStyle(
-                  fontFamily: 'sb', fontSize: 12, color: CustomColors.gery),
+                fontFamily: 'sb',
+                fontSize: 12,
+                color: CustomColors.gery,
+              ),
             ),
             const Spacer(),
             const Text(
               'مشاهده همه',
-              style: TextStyle(fontFamily: 'sb', color: CustomColors.blue),
+              style: TextStyle(
+                fontFamily: 'sb',
+                color: CustomColors.blue,
+              ),
             ),
-            const SizedBox(
-              width: 10,
+            const SizedBox(width: 10),
+            Image.asset(
+              'assets/images/icon_left_categroy.png',
             ),
-            Image.asset('assets/images/icon_left_categroy.png'),
           ],
         ),
       ),
@@ -142,10 +165,7 @@ class _getMostViewedTitle extends StatelessWidget {
 
 class _getBestSellerProducts extends StatelessWidget {
   List<Product> productList;
-  _getBestSellerProducts(
-    this.productList, {
-    Key? key,
-  }) : super(key: key);
+  _getBestSellerProducts(this.productList);
 
   @override
   Widget build(BuildContext context) {
@@ -155,14 +175,15 @@ class _getBestSellerProducts extends StatelessWidget {
         child: SizedBox(
           height: 200,
           child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: productList.length,
-              itemBuilder: ((context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: ProductItem(productList[index]),
-                );
-              })),
+            scrollDirection: Axis.horizontal,
+            itemCount: productList.length,
+            itemBuilder: ((context, index) {
+              return Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: ProductItem(productList[index]),
+              );
+            }),
+          ),
         ),
       ),
     );
@@ -170,9 +191,7 @@ class _getBestSellerProducts extends StatelessWidget {
 }
 
 class _getBestSellerTitle extends StatelessWidget {
-  const _getBestSellerTitle({
-    Key? key,
-  }) : super(key: key);
+  const _getBestSellerTitle();
 
   @override
   Widget build(BuildContext context) {
@@ -184,17 +203,25 @@ class _getBestSellerTitle extends StatelessWidget {
             const Text(
               'پرفروش ترین‌ ها',
               style: TextStyle(
-                  fontFamily: 'sb', fontSize: 12, color: CustomColors.gery),
+                fontFamily: 'sb',
+                fontSize: 12,
+                color: CustomColors.gery,
+              ),
             ),
             const Spacer(),
             const Text(
               'مشاهده همه',
-              style: TextStyle(fontFamily: 'sb', color: CustomColors.blue),
+              style: TextStyle(
+                fontFamily: 'sb',
+                color: CustomColors.blue,
+              ),
             ),
             const SizedBox(
               width: 10,
             ),
-            Image.asset('assets/images/icon_left_categroy.png'),
+            Image.asset(
+              'assets/images/icon_left_categroy.png',
+            ),
           ],
         ),
       ),
@@ -204,10 +231,7 @@ class _getBestSellerTitle extends StatelessWidget {
 
 class _getCategoryList extends StatelessWidget {
   List<Category> listCategories;
-  _getCategoryList(
-    this.listCategories, {
-    Key? key,
-  }) : super(key: key);
+  _getCategoryList(this.listCategories);
 
   @override
   Widget build(BuildContext context) {
@@ -217,14 +241,15 @@ class _getCategoryList extends StatelessWidget {
         child: SizedBox(
           height: 100,
           child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: listCategories.length,
-              itemBuilder: ((context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: CategoryItemChip(listCategories[index]),
-                );
-              })),
+            scrollDirection: Axis.horizontal,
+            itemCount: listCategories.length,
+            itemBuilder: ((context, index) {
+              return Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: CategoryItemChip(listCategories[index]),
+              );
+            }),
+          ),
         ),
       ),
     );
@@ -232,9 +257,7 @@ class _getCategoryList extends StatelessWidget {
 }
 
 class _getCategoryListTitle extends StatelessWidget {
-  const _getCategoryListTitle({
-    Key? key,
-  }) : super(key: key);
+  const _getCategoryListTitle();
 
   @override
   Widget build(BuildContext context) {
@@ -248,7 +271,10 @@ class _getCategoryListTitle extends StatelessWidget {
             Text(
               'دسته‌ بندی',
               style: TextStyle(
-                  fontFamily: 'sb', fontSize: 12, color: CustomColors.gery),
+                fontFamily: 'sb',
+                fontSize: 12,
+                color: CustomColors.gery,
+              ),
             )
           ],
         ),
@@ -259,10 +285,7 @@ class _getCategoryListTitle extends StatelessWidget {
 
 class _getBanners extends StatelessWidget {
   List<BannerCampain> bannerCampain;
-  _getBanners(
-    this.bannerCampain, {
-    Key? key,
-  }) : super(key: key);
+  _getBanners(this.bannerCampain);
 
   @override
   Widget build(BuildContext context) {
@@ -273,9 +296,7 @@ class _getBanners extends StatelessWidget {
 }
 
 class _getSearchBox extends StatelessWidget {
-  const _getSearchBox({
-    Key? key,
-  }) : super(key: key);
+  const _getSearchBox();
 
   @override
   Widget build(BuildContext context) {
@@ -295,7 +316,9 @@ class _getSearchBox extends StatelessWidget {
               const SizedBox(
                 width: 16,
               ),
-              Image.asset('assets/images/icon_search.png'),
+              Image.asset(
+                'assets/images/icon_search.png',
+              ),
               const SizedBox(
                 width: 10,
               ),
@@ -304,13 +327,16 @@ class _getSearchBox extends StatelessWidget {
                   'جستجوی محصولات',
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                      fontFamily: 'sb', fontSize: 16, color: CustomColors.gery),
+                    fontFamily: 'sb',
+                    fontSize: 16,
+                    color: CustomColors.gery,
+                  ),
                 ),
               ),
-              Image.asset('assets/images/icon_apple_blue.png'),
-              const SizedBox(
-                width: 16,
-              )
+              Image.asset(
+                'assets/images/icon_apple_blue.png',
+              ),
+              const SizedBox(width: 16)
             ],
           ),
         ),

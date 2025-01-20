@@ -1,8 +1,6 @@
 import 'package:apple_shop/bloc/authentication/auth_bloc.dart';
 import 'package:apple_shop/bloc/authentication/auth_event.dart';
 import 'package:apple_shop/bloc/authentication/auth_state.dart';
-import 'package:apple_shop/constants/colors.dart';
-import 'package:apple_shop/main.dart';
 import 'package:apple_shop/screens/dashbord_screen.dart';
 import 'package:apple_shop/screens/register_screen.dart';
 import 'package:flutter/material.dart';
@@ -46,16 +44,15 @@ class ViewContainer extends StatelessWidget {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                const SizedBox(
-                  height: 60,
+                const SizedBox(height: 60),
+                SizedBox(
+                  height: 200,
+                  width: 200,
+                  child: Image.asset(
+                    'assets/images/login_photo.jpg',
+                  ),
                 ),
-                Container(
-                    height: 200,
-                    width: 200,
-                    child: Image.asset('assets/images/login_photo.jpg')),
-                const SizedBox(
-                  height: 60,
-                ),
+                const SizedBox(height: 60),
                 Padding(
                   padding: const EdgeInsets.all(24),
                   child: Column(
@@ -63,11 +60,12 @@ class ViewContainer extends StatelessWidget {
                     children: [
                       Text(
                         'نام کاربری :',
-                        style: TextStyle(fontFamily: 'dana', fontSize: 16),
+                        style: TextStyle(
+                          fontFamily: 'dana',
+                          fontSize: 16,
+                        ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      const SizedBox(height: 10),
                       Container(
                         color: Colors.grey[300],
                         child: TextField(
@@ -75,9 +73,10 @@ class ViewContainer extends StatelessWidget {
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                             labelStyle: TextStyle(
-                                fontFamily: 'sm',
-                                fontSize: 18,
-                                color: Colors.black),
+                              fontFamily: 'sm',
+                              fontSize: 18,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                       )
@@ -92,11 +91,12 @@ class ViewContainer extends StatelessWidget {
                     children: [
                       Text(
                         'رمز عبور:',
-                        style: TextStyle(fontFamily: 'dana', fontSize: 16),
+                        style: TextStyle(
+                          fontFamily: 'dana',
+                          fontSize: 16,
+                        ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      const SizedBox(height: 10),
                       Container(
                         color: Colors.grey[300],
                         child: TextField(
@@ -107,65 +107,50 @@ class ViewContainer extends StatelessWidget {
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                             labelStyle: TextStyle(
-                                fontFamily: 'sm',
-                                fontSize: 18,
-                                color: Colors.black),
+                              fontFamily: 'sm',
+                              fontSize: 18,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                       )
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                BlocConsumer<AuthBloc, AuthState>(listener: ((context, state) {
-                  //logic
-                  //toast //snack //diaolg //navigate
-                  if (state is AuthResponseState) {
-                    state.reponse.fold((l) {
-                      _usernameTextController.text = '';
-                      _passwordTextController.text = '';
-                      var snackbar = SnackBar(
-                        content: Text(
-                          l,
-                          style: TextStyle(fontFamily: 'dana', fontSize: 14),
-                        ),
-                        backgroundColor: Colors.black,
-                        behavior: SnackBarBehavior.floating,
-                        duration: Duration(seconds: 1),
-                      );
-                      ScaffoldMessenger.of(context).showSnackBar(snackbar);
-                    }, (r) {
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => DashBoardScreen()));
-                    });
-                  }
-                }), builder: ((context, state) {
-                  if (state is AuthInitiateState) {
-                    return ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        textStyle: TextStyle(fontFamily: 'dana', fontSize: 20),
-                        backgroundColor: Colors.blue[700],
-                        minimumSize: Size(200, 48),
-                      ),
-                      onPressed: () {
-                        BlocProvider.of<AuthBloc>(context).add(AuthLoginRequest(
-                            _usernameTextController.text,
-                            _passwordTextController.text));
-                      },
-                      child: Text('ورود به حساب کاربری'),
-                    );
-                  }
-
-                  if (state is AuthLoadingState) {
-                    return CircularProgressIndicator();
-                  }
-
-                  if (state is AuthResponseState) {
-                    Widget widget = Text('');
-                    state.reponse.fold((l) {
-                      widget = ElevatedButton(
+                const SizedBox(height: 20),
+                BlocConsumer<AuthBloc, AuthState>(
+                  listener: ((context, state) {
+                    //logic
+                    //toast //snack //diaolg //navigate
+                    if (state is AuthResponseState) {
+                      state.reponse.fold((l) {
+                        _usernameTextController.text = '';
+                        _passwordTextController.text = '';
+                        var snackbar = SnackBar(
+                          content: Text(
+                            l,
+                            style: TextStyle(
+                              fontFamily: 'dana',
+                              fontSize: 14,
+                            ),
+                          ),
+                          backgroundColor: Colors.black,
+                          behavior: SnackBarBehavior.floating,
+                          duration: Duration(seconds: 1),
+                        );
+                        ScaffoldMessenger.of(context).showSnackBar(snackbar);
+                      }, (r) {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => DashBoardScreen(),
+                          ),
+                        );
+                      });
+                    }
+                  }),
+                  builder: ((context, state) {
+                    if (state is AuthInitiateState) {
+                      return ElevatedButton(
                         style: ElevatedButton.styleFrom(
                           textStyle:
                               TextStyle(fontFamily: 'dana', fontSize: 20),
@@ -174,33 +159,66 @@ class ViewContainer extends StatelessWidget {
                         ),
                         onPressed: () {
                           BlocProvider.of<AuthBloc>(context).add(
-                              AuthLoginRequest(_usernameTextController.text,
-                                  _passwordTextController.text));
+                            AuthLoginRequest(
+                              _usernameTextController.text,
+                              _passwordTextController.text,
+                            ),
+                          );
                         },
                         child: Text('ورود به حساب کاربری'),
                       );
-                    }, (r) {
-                      widget = Text(r);
-                    });
-                    return widget;
-                  }
+                    }
 
-                  return Text('خطای نا مشخص !');
-                })),
-                const SizedBox(
-                  height: 20,
+                    if (state is AuthLoadingState) {
+                      return CircularProgressIndicator();
+                    }
+
+                    if (state is AuthResponseState) {
+                      Widget widget = Text('');
+                      state.reponse.fold((l) {
+                        widget = ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            textStyle:
+                                TextStyle(fontFamily: 'dana', fontSize: 20),
+                            backgroundColor: Colors.blue[700],
+                            minimumSize: Size(200, 48),
+                          ),
+                          onPressed: () {
+                            BlocProvider.of<AuthBloc>(context).add(
+                              AuthLoginRequest(
+                                _usernameTextController.text,
+                                _passwordTextController.text,
+                              ),
+                            );
+                          },
+                          child: Text('ورود به حساب کاربری'),
+                        );
+                      }, (r) {
+                        widget = Text(r);
+                      });
+                      return widget;
+                    }
+
+                    return Text('خطای نا مشخص !');
+                  }),
                 ),
+                const SizedBox(height: 20),
                 GestureDetector(
-                    onTap: () {
-                      Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) {
+                  onTap: () {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(builder: (context) {
                         return RegisterScreen();
-                      }));
-                    },
-                    child: Text(
-                      'اگر حساب کاربری ندارید ثبت نام کنید',
-                      style: TextStyle(fontFamily: 'dana', fontSize: 16),
-                    ))
+                      }),
+                    );
+                  },
+                  child: Text(
+                    'اگر حساب کاربری ندارید ثبت نام کنید',
+                    style: TextStyle(
+                      fontFamily: 'dana',
+                      fontSize: 16,
+                    ),
+                  ),
+                )
               ],
             ),
           ),

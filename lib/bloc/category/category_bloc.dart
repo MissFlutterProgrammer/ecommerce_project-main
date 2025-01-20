@@ -11,7 +11,9 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     on<CategoryRequestList>((event, emit) async {
       emit(CategoryLoadingState());
       var response = await _repository.getCategories();
-      emit(CategoryResponseState(response));
+      emit(
+        CategoryResponseState(response),
+      );
     });
   }
 }

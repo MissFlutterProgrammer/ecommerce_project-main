@@ -4,7 +4,6 @@ import 'package:apple_shop/screens/login_screen.dart';
 import 'package:apple_shop/util/auth_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
 import 'di/di.dart';
 
 GlobalKey<NavigatorState> globalNavigatorKey = GlobalKey<NavigatorState>();
@@ -35,9 +34,8 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       navigatorKey: globalNavigatorKey,
-      home: (AuthManager.readAuth().isEmpty)
-          ?  LoginScreen()
-          : DashBoardScreen(),
+      home:
+          (AuthManager.readAuth().isEmpty) ? LoginScreen() : DashBoardScreen(),
     );
   }
 }

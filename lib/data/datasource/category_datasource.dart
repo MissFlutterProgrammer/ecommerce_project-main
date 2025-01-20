@@ -1,6 +1,5 @@
 import 'package:apple_shop/data/model/category.dart';
 import 'package:dio/dio.dart';
-
 import '../../di/di.dart';
 import '../../util/api_exception.dart';
 
@@ -15,10 +14,15 @@ class CategoryRemoteDatasource extends ICategoryDatasource {
     try {
       var respones = await _dio.get('collections/category/records');
       return respones.data['items']
-          .map<Category>((jsonObject) => Category.fromMapJson(jsonObject))
+          .map<Category>(
+            (jsonObject) => Category.fromMapJson(jsonObject),
+          )
           .toList();
-    } on DioError catch (ex) {
-      throw ApiException(ex.response?.statusCode, ex.response?.data['message']);
+    } on DioException catch (ex) {
+      throw ApiException(
+        ex.response?.statusCode,
+        ex.response?.data['message'],
+      );
     } catch (ex) {
       throw ApiException(0, 'unknown erorr');
     }

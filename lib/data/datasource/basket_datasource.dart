@@ -1,5 +1,4 @@
 import 'package:hive_flutter/hive_flutter.dart';
-
 import '../model/card_item.dart';
 
 abstract class IBasketDatasource {
@@ -26,13 +25,15 @@ class BasketLocalDatasouce extends IBasketDatasource {
   Future<int> getBasketFinalPrice() async {
     var productList = box.values.toList();
     var finalPrice = productList.fold(
-        0, (accumulator, product) => accumulator + product.realPrice!);
+      0,
+      (accumulator, product) => accumulator + product.realPrice!,
+    );
 
     return finalPrice;
   }
 
   @override
-  Future<void> removeProduct(int index) async{   
+  Future<void> removeProduct(int index) async {
     box.deleteAt(index);
   }
 }

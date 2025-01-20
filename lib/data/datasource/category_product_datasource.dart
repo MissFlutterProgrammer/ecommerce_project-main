@@ -1,7 +1,4 @@
-import 'dart:ffi';
-
 import 'package:dio/dio.dart';
-
 import '../../di/di.dart';
 import '../../util/api_exception.dart';
 import '../model/product.dart';
@@ -23,15 +20,22 @@ class CategoryProductRemoteDatasource extends ICategoryProductDatasource {
       if (categoryId == 'qnbj8d6b9lzzpn8') {
         respones = await _dio.get('collections/products/records');
       } else {
-        respones = await _dio.get('collections/products/records',
-            queryParameters: qParams);
+        respones = await _dio.get(
+          'collections/products/records',
+          queryParameters: qParams,
+        );
       }
 
       return respones.data['items']
-          .map<Product>((jsonObject) => Product.fromJson(jsonObject))
+          .map<Product>(
+            (jsonObject) => Product.fromJson(jsonObject),
+          )
           .toList();
-    } on DioError catch (ex) {
-      throw ApiException(ex.response?.statusCode, ex.response?.data['message']);
+    } on DioException catch (ex) {
+      throw ApiException(
+        ex.response?.statusCode,
+        ex.response?.data['message'],
+      );
     } catch (ex) {
       throw ApiException(0, 'unknown erorr');
     }

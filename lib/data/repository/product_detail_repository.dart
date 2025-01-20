@@ -4,7 +4,6 @@ import 'package:apple_shop/data/model/product_peroperty.dart';
 import 'package:apple_shop/data/model/product_variant.dart';
 import 'package:apple_shop/data/model/variant_type.dart';
 import 'package:dartz/dartz.dart';
-
 import '../../di/di.dart';
 import '../../util/api_exception.dart';
 import '../model/category.dart';

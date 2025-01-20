@@ -12,7 +12,9 @@ class CategoryProductBloc
   CategoryProductBloc() : super(CategoryProductLoadingState()) {
     on<CategoryProductInitialize>((event, emit) async {
       var response = await _repository.getProductByCategoryId(event.categoryId);
-      emit(CategoryProductResponseSuccessState(response));
+      emit(
+        CategoryProductResponseSuccessState(response),
+      );
     });
   }
 }

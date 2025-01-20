@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 part of 'comment_bloc.dart';
 
 @immutable
@@ -16,9 +18,8 @@ class CommentPostLoading extends CommentState {
   CommentPostLoading(this.isLoading);
 }
 
-
 class CommentPostResponse extends CommentState {
-  final Either<String,String> response;
+  final Either<String, String> response;
 
   CommentPostResponse(this.response);
 }

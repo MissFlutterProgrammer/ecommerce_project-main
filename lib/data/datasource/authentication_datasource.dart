@@ -1,8 +1,6 @@
-import 'package:apple_shop/di/di.dart';
 import 'package:apple_shop/util/api_exception.dart';
 import 'package:apple_shop/util/auth_manager.dart';
 import 'package:apple_shop/util/dio_provider.dart';
-import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
 abstract class IAuthenticationDatasource {
@@ -28,8 +26,9 @@ class AuthenticationRemote implements IAuthenticationDatasource {
       if (response.statusCode == 200) {
         login(username, password);
       }
-    } on DioError catch (ex) {
-      throw ApiException(ex.response?.statusCode, ex.response?.data['message'],response: ex.response);
+    } on DioException catch (ex) {
+      throw ApiException(ex.response?.statusCode, ex.response?.data['message'],
+          response: ex.response);
     } catch (ex) {
       throw ApiException(0, 'unknown erorr');
     }
@@ -48,8 +47,11 @@ class AuthenticationRemote implements IAuthenticationDatasource {
         AuthManager.saveToken(response.data?['token']);
         return response.data?['token'];
       }
-    } on DioError catch (ex) {
-      throw ApiException(ex.response?.statusCode, ex.response?.data['message']);
+    } on DioException catch (ex) {
+      throw ApiException(
+        ex.response?.statusCode,
+        ex.response?.data['message'],
+      );
     } catch (ex) {
       throw ApiException(0, 'unknown erorr');
     }
