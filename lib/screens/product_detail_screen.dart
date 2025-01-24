@@ -1079,7 +1079,10 @@ class _ColorVarinantListState extends State<ColorVarinantList> {
           itemCount: widget.variantList.length,
           itemBuilder: ((context, index) {
             String categoryColor = 'ff${widget.variantList[index].value}';
-            int hexColor = int.parse(categoryColor, radix: 16);
+            int hexColor = int.parse(
+              categoryColor,
+              radix: 16,
+            );
             return GestureDetector(
               onTap: () {
                 setState(() {

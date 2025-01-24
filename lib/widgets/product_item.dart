@@ -115,13 +115,11 @@ class ProductItem extends StatelessWidget {
                     ),
                     boxShadow: [
                       BoxShadow(
-                          color: CustomColors.blue,
-                          blurRadius: 25,
-                          spreadRadius: -12,
-                          offset: Offset(
-                            0.0,
-                            15,
-                          ))
+                        color: CustomColors.blue,
+                        blurRadius: 25,
+                        spreadRadius: -12,
+                        offset: Offset(0.0, 15),
+                      )
                     ],
                   ),
                   child: Padding(

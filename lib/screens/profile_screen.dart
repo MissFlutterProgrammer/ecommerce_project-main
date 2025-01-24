@@ -25,9 +25,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    const SizedBox(
-                      width: 16,
-                    ),
+                    const SizedBox(width: 16),
                     Image.asset(
                       'assets/images/icon_apple_blue.png',
                     ),

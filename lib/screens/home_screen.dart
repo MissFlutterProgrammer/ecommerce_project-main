@@ -319,9 +319,7 @@ class _getSearchBox extends StatelessWidget {
               Image.asset(
                 'assets/images/icon_search.png',
               ),
-              const SizedBox(
-                width: 10,
-              ),
+              const SizedBox(width: 10),
               const Expanded(
                 child: Text(
                   'جستجوی محصولات',

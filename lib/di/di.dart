@@ -35,7 +35,8 @@ Future<void> getItInit() async {
 
 Future<void> _initComponents() async {
   locator.registerSingleton<SharedPreferences>(
-      await SharedPreferences.getInstance());
+    await SharedPreferences.getInstance(),
+  );
   locator.registerSingleton<UrlHandler>(UrlLauncher());
   locator.registerSingleton<PaymentHandler>(
     ZarinpalPaymentHandler(locator.get()),

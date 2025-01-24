@@ -17,8 +17,9 @@ class LoginScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => AuthBloc(),
       child: ViewContainer(
-          usernameTextController: _usernameTextController,
-          passwordTextController: _passwordTextController),
+        usernameTextController: _usernameTextController,
+        passwordTextController: _passwordTextController,
+      ),
     );
   }
 }
@@ -152,8 +153,10 @@ class ViewContainer extends StatelessWidget {
                     if (state is AuthInitiateState) {
                       return ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          textStyle:
-                              TextStyle(fontFamily: 'dana', fontSize: 20),
+                          textStyle: TextStyle(
+                            fontFamily: 'dana',
+                            fontSize: 20,
+                          ),
                           backgroundColor: Colors.blue[700],
                           minimumSize: Size(200, 48),
                         ),
@@ -165,7 +168,9 @@ class ViewContainer extends StatelessWidget {
                             ),
                           );
                         },
-                        child: Text('ورود به حساب کاربری'),
+                        child: Text(
+                          'ورود به حساب کاربری',
+                        ),
                       );
                     }
 
@@ -191,7 +196,9 @@ class ViewContainer extends StatelessWidget {
                               ),
                             );
                           },
-                          child: Text('ورود به حساب کاربری'),
+                          child: Text(
+                            'ورود به حساب کاربری',
+                          ),
                         );
                       }, (r) {
                         widget = Text(r);

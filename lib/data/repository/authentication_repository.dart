@@ -8,7 +8,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class IAuthRepository {
   Future<Either<String, String>> register(
-      String username, String password, String passwordConfirm);
+    String username,
+    String password,
+    String passwordConfirm,
+  );
 
   Future<Either<String, String>> login(String username, String password);
 }

@@ -15,7 +15,9 @@ class LoadingAnimation extends StatelessWidget {
       child: Center(
         child: LoadingIndicator(
           indicatorType: Indicator.ballRotateChase,
-          colors: [CustomColors.blue],
+          colors: [
+            CustomColors.blue,
+          ],
           strokeWidth: 0.1,
         ),
       ),

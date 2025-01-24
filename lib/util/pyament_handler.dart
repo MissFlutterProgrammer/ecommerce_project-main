@@ -43,14 +43,15 @@ class ZarinpalPaymentHandler extends PaymentHandler {
   @override
   Future<void> sendPaymentRequest() async {
     ZarinPal().startPayment(
-        _paymentRequest,
-        (status, paymentGatewayUri) {
-          if (status == 100) {
-            urlHandler.openUrl(paymentGatewayUri!);
-          } else {
-            print('Payment request failed with status: $status');
-          }
-        } as OnCallbackRequestPaymentListener);
+      _paymentRequest,
+      (status, paymentGatewayUri) {
+        if (status == 100) {
+          urlHandler.openUrl(paymentGatewayUri!);
+        } else {
+          print('Payment request failed with status: $status');
+        }
+      } as OnCallbackRequestPaymentListener,
+    );
   }
 
   @override

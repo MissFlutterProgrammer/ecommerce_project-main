@@ -48,9 +48,7 @@ class _ProductListScreenState extends State<ProductListScreen> {
                       ),
                       child: Row(
                         children: [
-                          const SizedBox(
-                            width: 16,
-                          ),
+                          const SizedBox(width: 16),
                           Image.asset(
                             'assets/images/icon_apple_blue.png',
                           ),

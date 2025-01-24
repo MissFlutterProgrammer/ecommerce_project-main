@@ -75,7 +75,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 if (state is CategoryResponseState) {
                   return state.response.fold((l) {
                     return SliverToBoxAdapter(
-                      child: Center(child: Text(l)),
+                      child: Center(
+                        child: Text(l),
+                      ),
                     );
                   }, (r) {
                     return ListCategory(
@@ -106,7 +108,9 @@ class ListCategory extends StatelessWidget {
       sliver: SliverGrid(
         delegate: SliverChildBuilderDelegate(
           ((context, index) {
-            return CachedImage(imageUrl: list?[index].thumbnail);
+            return CachedImage(
+              imageUrl: list?[index].thumbnail,
+            );
           }),
           childCount: list?.length ?? 0,
         ),

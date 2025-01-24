@@ -7,6 +7,9 @@ abstract class UrlHandler {
 class UrlLauncher extends UrlHandler {
   @override
   void openUrl(String uri) {
-    launchUrl(Uri.parse(uri), mode: LaunchMode.externalApplication);
+    launchUrl(
+      Uri.parse(uri),
+      mode: LaunchMode.externalApplication,
+    );
   }
 }

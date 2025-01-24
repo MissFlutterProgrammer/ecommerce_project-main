@@ -80,26 +80,29 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                   label: 'حساب کاربری',
                 ),
                 BottomNavigationBarItem(
-                    icon: Image.asset('assets/images/icon_basket.png'),
-                    activeIcon: Padding(
-                      padding: const EdgeInsets.only(bottom: 3),
-                      child: Container(
-                        decoration: const BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: CustomColors.blue,
-                              blurRadius: 20,
-                              spreadRadius: -7,
-                              offset: Offset(0.0, 13),
-                            )
-                          ],
-                        ),
-                        child: Image.asset(
-                          'assets/images/icon_basket_active.png',
-                        ),
+                  icon: Image.asset(
+                    'assets/images/icon_basket.png',
+                  ),
+                  activeIcon: Padding(
+                    padding: const EdgeInsets.only(bottom: 3),
+                    child: Container(
+                      decoration: const BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: CustomColors.blue,
+                            blurRadius: 20,
+                            spreadRadius: -7,
+                            offset: Offset(0.0, 13),
+                          )
+                        ],
+                      ),
+                      child: Image.asset(
+                        'assets/images/icon_basket_active.png',
                       ),
                     ),
-                    label: 'سبد خرید'),
+                  ),
+                  label: 'سبد خرید',
+                ),
                 BottomNavigationBarItem(
                   icon: Image.asset(
                     'assets/images/icon_category.png',
@@ -117,8 +120,9 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                           )
                         ],
                       ),
-                      child:
-                          Image.asset('assets/images/icon_category_active.png'),
+                      child: Image.asset(
+                        'assets/images/icon_category_active.png',
+                      ),
                     ),
                   ),
                   label: 'دسته بندی',

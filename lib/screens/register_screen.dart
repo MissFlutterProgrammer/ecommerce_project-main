@@ -104,9 +104,7 @@ class ViewContainer extends StatelessWidget {
                           fontSize: 16,
                         ),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
+                      const SizedBox(height: 10),
                       Container(
                         color: Colors.grey[300],
                         child: TextField(
@@ -161,56 +159,59 @@ class ViewContainer extends StatelessWidget {
                     ],
                   ),
                 ),
-                BlocConsumer<AuthBloc, AuthState>(listener: ((context, state) {
-                  if (state is AuthResponseState) {
-                    state.reponse.fold((l) {}, (r) {
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => DashBoardScreen(),
-                        ),
-                      );
-                    });
-                  }
-                }), builder: ((context, state) {
-                  if (state is AuthInitiateState) {
-                    return ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        textStyle: TextStyle(
-                          fontFamily: 'dana',
-                          fontSize: 20,
-                        ),
-                        backgroundColor: Colors.blue[700],
-                        minimumSize: Size(200, 48),
-                      ),
-                      onPressed: () {
-                        BlocProvider.of<AuthBloc>(context).add(
-                          AuthRegisterRequest(
-                            _usernameTextController.text,
-                            _passwordTextController.text,
-                            _passwordConfirmTextController.text,
+                BlocConsumer<AuthBloc, AuthState>(
+                  listener: ((context, state) {
+                    if (state is AuthResponseState) {
+                      state.reponse.fold((l) {}, (r) {
+                        Navigator.of(context).pushReplacement(
+                          MaterialPageRoute(
+                            builder: (context) => DashBoardScreen(),
                           ),
                         );
-                      },
-                      child: Text('ثبت نام'),
-                    );
-                  }
+                      });
+                    }
+                  }),
+                  builder: ((context, state) {
+                    if (state is AuthInitiateState) {
+                      return ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          textStyle: TextStyle(
+                            fontFamily: 'dana',
+                            fontSize: 20,
+                          ),
+                          backgroundColor: Colors.blue[700],
+                          minimumSize: Size(200, 48),
+                        ),
+                        onPressed: () {
+                          BlocProvider.of<AuthBloc>(context).add(
+                            AuthRegisterRequest(
+                              _usernameTextController.text,
+                              _passwordTextController.text,
+                              _passwordConfirmTextController.text,
+                            ),
+                          );
+                        },
+                        child: Text('ثبت نام'),
+                      );
+                    }
 
-                  if (state is AuthLoadingState) {
-                    return CircularProgressIndicator();
-                  }
+                    if (state is AuthLoadingState) {
+                      return CircularProgressIndicator();
+                    }
 
-                  if (state is AuthResponseState) {
-                    Text widget = Text('');
-                    state.reponse.fold((l) {
-                      widget = Text(l);
-                    }, (r) {
-                      widget = Text(r);
-                    });
-                    return widget;
-                  }
+                    if (state is AuthResponseState) {
+                      Text widget = Text('');
+                      state.reponse.fold((l) {
+                        widget = Text(l);
+                      }, (r) {
+                        widget = Text(r);
+                      });
+                      return widget;
+                    }
 
-                  return Text('خطای نا مشخص !');
-                })),
+                    return Text('خطای نا مشخص !');
+                  }),
+                ),
                 const SizedBox(
                   height: 20,
                 ),

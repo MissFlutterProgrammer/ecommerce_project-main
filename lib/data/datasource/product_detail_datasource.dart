@@ -66,10 +66,15 @@ class DetailProductRemoteDatasource extends IDetailProductDatasource {
           queryParameters: qParams);
 
       return respones.data['items']
-          .map<Variant>((jsonObject) => Variant.fromJson(jsonObject))
+          .map<Variant>(
+            (jsonObject) => Variant.fromJson(jsonObject),
+          )
           .toList();
     } on DioException catch (ex) {
-      throw ApiException(ex.response?.statusCode, ex.response?.data['message']);
+      throw ApiException(
+        ex.response?.statusCode,
+        ex.response?.data['message'],
+      );
     } catch (ex) {
       throw ApiException(0, 'unknown erorr');
     }
@@ -121,10 +126,15 @@ class DetailProductRemoteDatasource extends IDetailProductDatasource {
           queryParameters: qParams);
 
       return respones.data['items']
-          .map<Property>((jsonObject) => Property.fromJson(jsonObject))
+          .map<Property>(
+            (jsonObject) => Property.fromJson(jsonObject),
+          )
           .toList();
     } on DioException catch (ex) {
-      throw ApiException(ex.response?.statusCode, ex.response?.data['message']);
+      throw ApiException(
+        ex.response?.statusCode,
+        ex.response?.data['message'],
+      );
     } catch (ex) {
       throw ApiException(0, 'unknown erorr');
     }

@@ -6,8 +6,14 @@ class Category {
   String? color;
   String? icon;
 //http://127.0.0.1:8090/api/files/COLLECTION_ID_OR_NAME/RECORD_ID/FILENAME
-  Category(this.collectionId, this.id, this.thumbnail, this.title, this.color,
-      this.icon);
+  Category(
+    this.collectionId,
+    this.id,
+    this.thumbnail,
+    this.title,
+    this.color,
+    this.icon,
+  );
 
   factory Category.fromMapJson(Map<String, dynamic> jsonObject) {
     return Category(

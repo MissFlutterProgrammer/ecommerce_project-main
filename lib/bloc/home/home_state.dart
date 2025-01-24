@@ -1,7 +1,6 @@
 import 'package:apple_shop/data/model/category.dart';
 import 'package:apple_shop/data/model/product.dart';
 import 'package:dartz/dartz.dart';
-
 import '../../data/model/banner.dart';
 
 abstract class HomeState {}
