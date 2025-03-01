@@ -183,8 +183,10 @@ class ViewContainer extends StatelessWidget {
                       state.reponse.fold((l) {
                         widget = ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            textStyle:
-                                TextStyle(fontFamily: 'dana', fontSize: 20),
+                            textStyle: TextStyle(
+                              fontFamily: 'dana',
+                              fontSize: 20,
+                            ),
                             backgroundColor: Colors.blue[700],
                             minimumSize: Size(200, 48),
                           ),

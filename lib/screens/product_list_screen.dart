@@ -20,8 +20,9 @@ class ProductListScreen extends StatefulWidget {
 class _ProductListScreenState extends State<ProductListScreen> {
   @override
   void initState() {
-    BlocProvider.of<CategoryProductBloc>(context)
-        .add(CategoryProductInitialize(widget.category.id!));
+    BlocProvider.of<CategoryProductBloc>(context).add(
+      CategoryProductInitialize(widget.category.id!),
+    );
     super.initState();
   }
 

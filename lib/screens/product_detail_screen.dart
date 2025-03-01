@@ -1,7 +1,6 @@
 // ignore_for_file: must_be_immutable
 
 import 'dart:ui';
-
 import 'package:apple_shop/bloc/basket/baset_event.dart';
 import 'package:apple_shop/bloc/basket/basket_bloc.dart';
 import 'package:apple_shop/bloc/comment/bloc/comment_bloc.dart';
@@ -86,9 +85,7 @@ class DetailContentWidget extends StatelessWidget {
                         ),
                         child: Row(
                           children: [
-                            const SizedBox(
-                              width: 16,
-                            ),
+                            const SizedBox(width: 16),
                             Image.asset(
                               'assets/images/icon_apple_blue.png',
                             ),
@@ -307,9 +304,7 @@ class DetailContentWidget extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              width: 10,
-                            ),
+                            const SizedBox(width: 10),
                             const Text(
                               ': نظرات کاربران',
                               style: TextStyle(
@@ -459,18 +454,14 @@ class CommentBottomsheet extends StatelessWidget {
                         color: Colors.black,
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20),
-                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
                         borderSide: BorderSide(
                           color: Colors.black,
                           width: 3,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(20),
-                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
                         borderSide: BorderSide(
                           color: CustomColors.blue,
                           width: 3,
@@ -577,7 +568,10 @@ class _ProductPropertiesState extends State<ProductProperties> {
               height: 46,
               decoration: BoxDecoration(
                 color: Colors.white,
-                border: Border.all(width: 1, color: CustomColors.gery),
+                border: Border.all(
+                  width: 1,
+                  color: CustomColors.gery,
+                ),
                 borderRadius: const BorderRadius.all(Radius.circular(15)),
               ),
               child: Row(
@@ -614,7 +608,10 @@ class _ProductPropertiesState extends State<ProductProperties> {
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: Colors.white,
-                border: Border.all(width: 1, color: CustomColors.gery),
+                border: Border.all(
+                  width: 1,
+                  color: CustomColors.gery,
+                ),
                 borderRadius: const BorderRadius.all(Radius.circular(15)),
               ),
               child: ListView.builder(
@@ -725,7 +722,11 @@ class _ProductDescriptionState extends State<ProductDescription> {
               ),
               child: Text(
                 widget.productDescription,
-                style: TextStyle(fontFamily: 'sm', fontSize: 16, height: 1.8),
+                style: TextStyle(
+                  fontFamily: 'sm',
+                  fontSize: 16,
+                  height: 1.8,
+                ),
                 textAlign: TextAlign.right,
               ),
             ),
@@ -1028,9 +1029,7 @@ class PriceTagButton extends StatelessWidget {
                       Container(
                         decoration: const BoxDecoration(
                           color: Colors.red,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(15),
-                          ),
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
                         ),
                         child: const Padding(
                           padding:
